@@ -1,0 +1,34 @@
+version: "3"
+services:
+  farm-postgres:
+    image: "postgres:13.1-alpine"
+    container_name: farm-postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=RabApp
+      - POSTGRES_USER=User101
+      - POSTGRES_PASSWORD=password101
+
+  farm-rest:
+    build: ./farm-rest
+    container_name: farm-rest
+    environment:
+      - DB_SERVER=farm-postgres
+      - POSTGRES_DB=jdbc:postgresql://farm-postgres/RabApp
+      - POSTGRES_USER=User101
+      - POSTGRES_PASSWORD=password101
+    ports:
+      - 8080:8080
+    depends_on:
+      - farm-postgres
+    links:
+      - farm-postgres
+
+  farm-web:
+    build: ./farm-web
+    container_name: farm-web
+    ports:
+      - 3000:3000
+    depends_on:
+      - farm-rest

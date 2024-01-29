@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-farm
+      author: Swaraj
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: ;
+            splitStatements: true
+            path: db/changelog/changes/create_table_farm.sql
+            stripComments: true
+  - changeSet:
+      id: create-table-movement
+      author: Swaraj
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: ;
+            splitStatements: true
+            path: db/changelog/changes/create_table_movement.sql
+            stripComments: true
+  - changeSet:
+      id: seed-farm-data
+      author: Swaraj
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: GO
+            splitStatements: true
+            path: db/changelog/changes/seed_farm_data.sql
+            stripComments: true
+  - changeSet:
+      id: seed-movement-data
+      author: Swaraj
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: GO
+            splitStatements: true
+            path: db/changelog/changes/seed_movement_data.sql
+            stripComments: true
